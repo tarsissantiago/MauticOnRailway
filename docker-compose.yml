@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  mautic:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - MAUTIC_DB_HOST=db
+      - MAUTIC_DB_USER=mautic
+      - MAUTIC_DB_PASSWORD=mauticpassword
+      - MAUTIC_DB_NAME=mautic
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=mautic
+      - MYSQL_USER=mautic
+      - MYSQL_PASSWORD=mauticpassword
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
