@@ -1,1 +1,1 @@
-FROM mautic/mautic:v5-apache
+FROM mautic/mautic:v4-apache
